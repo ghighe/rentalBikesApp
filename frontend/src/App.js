@@ -1,11 +1,8 @@
 import React from "react";
+import RouteLinks from "./Routes/RouteLinks";
 
 const App = () => {
-  return (
-    <React.Fragment>
-      <h1>Hello World</h1>
-    </React.Fragment>
-  );
+  return <RouteLinks />;
 };
 
 export default App;
