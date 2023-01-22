@@ -2,19 +2,8 @@ body {
   font-family: "Lato", sans-serif;
 }
 
-.main-container {
-  display: flex;
-  justify-content: center;
-}
-
-.left-menu {
-  width: 15%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-}
-
 .content {
-  width: auto;
+  background-color: #e7e3e3;
+  margin-left: 250px;
+  height: 100vh;
 }

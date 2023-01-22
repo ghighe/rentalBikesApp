@@ -5,6 +5,7 @@ const NavBar = () => {
   return (
     <div className="nav-bar">
       <h2>BIKE RENTAL</h2>
+      <hr></hr>
       <ul>
         <li>
           <Link className="nav-link" to="/">

@@ -6,14 +6,15 @@ import RouterLinks from "./Routes/RouterLinks";
 
 const App = () => {
   return (
-    <div className="main-container">
-      <nav className="left-menu">
+    <>
+      <nav>
         <NavBar />
       </nav>
+
       <main className="content">
         <RouterLinks />
       </main>
-    </div>
+    </>
   );
 };
 
