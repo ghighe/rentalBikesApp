@@ -1,70 +1,28 @@
 import React from "react";
 import "./Dashboard.css";
-import { makeStyles } from "@mui/styles";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-
-const useStyles = makeStyles({
-  root: {
-    display: "grid",
-    gridGap: "80px",
-    padding: "30px"
-  },
-
-  paper: {
-    height: "150px",
-    marginTop: "60px",
-    textAlign: "center",
-    padding: "30px 0"
-  }
-});
+import { MdDashboard } from "react-icons/md";
+import { MdNotificationsActive } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import DashboardCards from "../Components/DashboardCard/DashboardCards";
 
 const Dashboard = () => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
-      <h2>Dashboard</h2>
-      <Grid container spacing={3}>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>
-            <Typography variant="h6" component="h3">
-              Available bikes
-            </Typography>
-            <Typography component="p">48/50</Typography>
-            <hr style={{ marginTop: "15px" }}></hr>
-          </Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>
-            <Typography variant="h6" component="h3">
-              Revenue
-            </Typography>
-            <Typography>34.000$</Typography>
-            <hr style={{ marginTop: "15px" }}></hr>
-          </Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>
-            <Typography variant="h6" component="h3">
-              Fixed Issues
-            </Typography>
-            <Typography>75</Typography>
-            <hr style={{ marginTop: "15px" }}></hr>
-          </Paper>
-        </Grid>
-        <Grid item xs={3}>
-          <Paper className={classes.paper}>
-            <Typography variant="h6" component="h3">
-              Followers
-            </Typography>
-            <Typography>+245</Typography>
-            <hr style={{ marginTop: "15px" }}></hr>
-          </Paper>
-        </Grid>
-      </Grid>
-    </div>
+    <>
+      <div className="flex flex-col md:flex-row md:gap-6 justify-between">
+        <div className="font-light text-2xl">Dashboard</div>
+        <div className="flex cursor-pointer px-1 py-1">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="text-lg bg-transparent focus:outline-none border-b-2 border-gray-300 focus:border-dark-red"
+          />
+          <MdDashboard className="mx-2 mt-1 px-1 py-1 text-gray-700 " />
+          <MdNotificationsActive className="mx-2 mt-1 px-1 py-1 text-gray-700" />
+          <FaUser className="mx-2 mt-1 px-1 py-1 text-gray-700" />
+        </div>
+      </div>
+      <DashboardCards />
+    </>
   );
 };
 
