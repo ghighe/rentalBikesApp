@@ -1,0 +1,9 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.content {
+  background-color: #e7e3e3;
+  margin-left: 250px;
+  height: 100vh;
+}
