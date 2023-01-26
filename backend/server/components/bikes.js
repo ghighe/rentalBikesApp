@@ -3,7 +3,7 @@ const bikes = express.Router();
 const database = require("../database");
 
 bikes.get("/getBikes", (req, res) => {
-    database.query("SELECT * FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type", (err, result, fields) => {
+    database.query("SELECT description, extra_information, price_per_minute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type", (err, result, fields) => {
         if (err) throw err;
         if (result.length != 0) {
             res.json({ message: result });
@@ -15,7 +15,7 @@ bikes.get("/getBikes", (req, res) => {
 
 bikes.get("/getBike", (req, res) => {
     const extra_information = req.query.extra_information;
-    database.query(`SELECT * FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type WHERE extra_information LIKE "%${extra_information}%"`, (err, result, fields) => {
+    database.query(`SELECT description, extra_information, price_per_minute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type WHERE extra_information LIKE "%${extra_information}%"`, (err, result, fields) => {
         if (err) throw err;
         if (result.length != 0) {
             res.json({ message: result });
@@ -70,9 +70,9 @@ bikes.get("/editBike", (req, res) => {
 });
 
 bikes.get("/getBikesCount", (req, res) => {
-    database.query(`SELECT COUNT(rentals.id) AS rentals_count, COUNT(bikes.id) AS bikes_counts FROM bikes LEFT JOIN rentals ON rentals.bike_id = bikes.id`, (err, result, fields) => {
+    database.query(`SELECT COUNT(rentals.id) AS rentals_count, COUNT(bikes.id) AS bikes_count FROM bikes LEFT JOIN rentals ON rentals.bike_id = bikes.id`, (err, result, fields) => {
         if (err) throw err;
-        res.json({ message: result });
+        res.json({ message: { bikes_count: result[0]['bikes_count'], rentals_count: result[0]['rentals_count'] } });
     });
 });
 
