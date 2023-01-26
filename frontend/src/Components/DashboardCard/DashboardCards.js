@@ -1,7 +1,9 @@
 const DashboardCards = () => {
+  const cardLayout = "block rounded-lg shadow-lg bg-white text-center relative";
+
   return (
     <div class="flex flex-wrap justify-center gap-5 mt-10 max">
-      <div class="block rounded-lg shadow-lg bg-white text-center relative ">
+      <div class={cardLayout}>
         <div class="p-6">
           <h5 class="text-gray-400 text-md font-light mb-2  top-2 right-1 text-center">
             Available Bikes
@@ -13,7 +15,7 @@ const DashboardCards = () => {
         </div>
       </div>
 
-      <div class="block rounded-lg shadow-lg bg-white text-center relative ">
+      <div class={cardLayout}>
         <div class="p-6">
           <h5 class="text-gray-400 text-md font-light mb-2  top-2 right-1 text-center">
             Available Bikes
@@ -25,7 +27,7 @@ const DashboardCards = () => {
         </div>
       </div>
 
-      <div class="block rounded-lg shadow-lg bg-white text-center relative ">
+      <div class={cardLayout}>
         <div class="p-6">
           <h5 class="text-gray-400 text-md font-light mb-2  top-2 right-1 text-center">
             Available Bikes
@@ -37,7 +39,7 @@ const DashboardCards = () => {
         </div>
       </div>
 
-      <div class="block rounded-lg shadow-lg bg-white text-center relative ">
+      <div class={cardLayout}>
         <div class="p-6">
           <h5 class="text-gray-400 text-md font-light mb-2  top-2 right-1 text-center">
             Available Bikes
