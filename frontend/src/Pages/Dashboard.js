@@ -4,6 +4,7 @@ import { MdDashboard } from "react-icons/md";
 import { MdNotificationsActive } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
 import DashboardCards from "../Components/DashboardCard/DashboardCards";
+import LineChart from "../Components/Charts/LineChart";
 
 const Dashboard = () => {
   return (
@@ -21,7 +22,14 @@ const Dashboard = () => {
           <FaUser className="mx-2 mt-1 px-1 py-1 text-gray-700" />
         </div>
       </div>
-      <DashboardCards />
+      <div>
+        <DashboardCards />
+      </div>
+      <div className="flex flex-wrap justify-evenly gap-5 mb-2 mt-8">
+        <LineChart />
+        <LineChart />
+        <LineChart />
+      </div>
     </>
   );
 };
