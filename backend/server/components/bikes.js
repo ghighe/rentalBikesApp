@@ -1,35 +1,14 @@
 const express = require("express");
 const bikes = express.Router();
 const database = require("../database");
+const functions = require("../functions");
 
 bikes.get("/getBikes", (req, res) => {
     database.query("SELECT description, extra_information, price_per_minute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type", (err, result, fields) => {
         if (err) throw err;
         if (result.length != 0) {
             for (let i = 0; i < result.length; i++) {
-                let register_date = new Date(result[i]['register_date']);
-                let year = register_date.getFullYear();
-                let month = register_date.getMonth() + 1;
-                let dt = register_date.getDate();
-                let hr = register_date.getHours();
-                let mn = register_date.getMinutes();
-                let sc = register_date.getSeconds();
-                if (dt < 10) {
-                    dt = '0' + dt;
-                }
-                if (month < 10) {
-                    month = '0' + month;
-                }
-                if (hr < 10) {
-                    hr = '0' + hr;
-                }
-                if (mn < 10) {
-                    mn = '0' + mn;
-                }
-                if (sc < 10) {
-                    sc = '0' + sc;
-                }
-                result[i]['register_date'] = year + '-' + month + '-' + dt + " " + hr + ":" + mn + ":" + sc;
+                result[i]['register_date'] = functions.transformDate(result[i]['register_date']);
             }
             res.json({ message: result });
         } else {
@@ -43,29 +22,7 @@ bikes.get("/getBike", (req, res) => {
     database.query(`SELECT description, extra_information, price_per_minute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type WHERE bikes.id="${bike_id}"`, (err, result, fields) => {
         if (err) throw err;
         if (result.length != 0) {
-            let register_date = new Date(result[0]['register_date']);
-            let year = register_date.getFullYear();
-            let month = register_date.getMonth() + 1;
-            let dt = register_date.getDate();
-            let hr = register_date.getHours();
-            let mn = register_date.getMinutes();
-            let sc = register_date.getSeconds();
-            if (dt < 10) {
-                dt = '0' + dt;
-            }
-            if (month < 10) {
-                month = '0' + month;
-            }
-            if (hr < 10) {
-                hr = '0' + hr;
-            }
-            if (mn < 10) {
-                mn = '0' + mn;
-            }
-            if (sc < 10) {
-                sc = '0' + sc;
-            }
-            result[0]['register_date'] = year + '-' + month + '-' + dt + " " + hr + ":" + mn + ":" + sc;
+            result[0]['register_date'] = functions.transformDate(result[0]['register_date']);
             res.json({ message: result });
         } else {
             res.json({ message: `No bike with ID ${bike_id}!`});
