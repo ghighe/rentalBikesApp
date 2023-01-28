@@ -4,7 +4,7 @@ const database = require("../database");
 const functions = require("../functions");
 
 bikes.get("/getBikes", (req, res) => {
-    database.query("SELECT description, extra_information, price_per_minute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type", (err, result, fields) => {
+    database.query("SELECT description, price_per_minute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type", (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err });
             return;
@@ -22,7 +22,7 @@ bikes.get("/getBikes", (req, res) => {
 
 bikes.get("/getBike", (req, res) => {
     const bike_id = req.query.bike_id;
-    database.query(`SELECT description, extra_information, price_per_mainute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type WHERE bikes.id="${bike_id}"`, (err, result, fields) => {
+    database.query(`SELECT description, price_per_mainute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type WHERE bikes.id="${bike_id}"`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err });
             return;
@@ -36,10 +36,10 @@ bikes.get("/getBike", (req, res) => {
     });
 });
 
-bikes.get("/addBike", (req, res) => {
-    const extra_information = req.query.extra_information;
+bikes.post("/addBike", (req, res) => {
+    const description = req.query.description;
     const type = req.query.type;
-    database.query(`INSERT INTO bikes (type, extra_information) VALUES ("${type}", "${extra_information}")`, (err, result, fields) => {
+    database.query(`INSERT INTO bikes (type, description) VALUES ("${type}", "${description}")`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err });
             return;
@@ -79,14 +79,14 @@ bikes.get("/deleteBike", (req, res) => {
 bikes.get("/editBike", (req, res) => {
     const bike_id = req.query.bike_id;
     const type = req.query.type;
-    const extra_information = req.query.extra_information;
+    const description = req.query.description;
     database.query(`SELECT id FROM bikes WHERE id="${bike_id}"`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err });
             return;
         }
         if (result.length) {
-            database.query(`UPDATE bikes SET type="${type}", extra_information="${extra_information}" WHERE id="${bike_id}"`, (err, result, fields) => {
+            database.query(`UPDATE bikes SET type="${type}", description="${description}" WHERE id="${bike_id}"`, (err, result, fields) => {
                 if (err) {
                     res.json({ type: "error", message: err });
                     return;
