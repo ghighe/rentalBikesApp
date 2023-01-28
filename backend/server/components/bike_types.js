@@ -31,16 +31,16 @@ bike_types.get("/getBikeType", (req, res) => {
     });
 });
 
-bike_types.get("/addBikeType", (req, res) => {
+bike_types.post("/addBikeType", (req, res) => {
+    const id = req.query.id;
     const description = req.query.description;
     const price_per_minute = req.query.price_per_minute;
-    database.query(`INSERT INTO bike_types (description, price_per_minute) VALUES ("${description}", "${price_per_minute}")`, (err, result, fields) => {
+    database.query(`INSERT INTO bike_types (id, description, price_per_minute) VALUES ("${id}", "${description}", "${price_per_minute}")`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err });
             return;
         }
-        let bike_type_id = result.insertId;
-        res.json({ message: `Success! A new bike type with ID ${bike_type_id} has been added!` });
+        res.json({ message: `Success! A new bike type with ID ${id} has been added!` });
     });
 });
 

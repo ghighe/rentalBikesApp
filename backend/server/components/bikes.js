@@ -36,7 +36,7 @@ bikes.get("/getBike", (req, res) => {
     });
 });
 
-bikes.post("/addBike", (req, res) => {
+bikes.get("/addBike", (req, res) => {
     const description = req.query.description;
     const type = req.query.type;
     database.query(`INSERT INTO bikes (type, description) VALUES ("${type}", "${description}")`, (err, result, fields) => {
