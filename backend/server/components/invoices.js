@@ -9,9 +9,9 @@ invoices.get("/getInvoices", (req, res) => {
             return;
         }
         if (result.length != 0) {
-            res.json({ message: result });
+            res.json({ type: "success", message: result });
         } else {
-            res.json({ message: `No invoices!`});
+            res.json({ type: "error", message: `No invoices!`});
         }
     });
 });
