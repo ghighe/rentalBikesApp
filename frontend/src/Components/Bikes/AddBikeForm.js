@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useRef } from "react";
-import Swal from "sweetalert2";
+import { generateAlert } from "../../functions";
 
 const AddBikeForm = () => {
   const getBikeTypeInput = useRef();
@@ -23,7 +23,7 @@ const AddBikeForm = () => {
     formReset.current.reset();
 
     axios.post("/bike_types/addBikeType", data).then((response) => {
-      Swal.fire((response.data.type === "error" ? "Error!" : "Good job!"), `${response.data.message}`, (response.data.type === "error" ? "warning" : "success"));
+      generateAlert(response.data.type, response.data.message);
     });
   }
 
