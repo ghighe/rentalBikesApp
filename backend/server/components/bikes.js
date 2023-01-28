@@ -15,7 +15,7 @@ bikes.get("/getBikes", (req, res) => {
             }
             res.json({ message: result });
         } else {
-            res.json({ message: `No bikes!`});
+            res.json({ type: "error", message: `No bikes!`});
         }
     });
 });
@@ -31,7 +31,7 @@ bikes.get("/getBike", (req, res) => {
             result[0]['register_date'] = functions.transformDate(result[0]['register_date']);
             res.json({ message: result });
         } else {
-            res.json({ message: `No bike with ID ${bike_id}!`});
+            res.json({ type: "error", message: `No bike with ID ${bike_id}!`});
         }
     });
 });
@@ -71,7 +71,7 @@ bikes.get("/deleteBike", (req, res) => {
                 });
             });
         } else {
-            res.json({ message: `The bike with ID ${bike_id} does not exist in database!` });
+            res.json({ type: "error", message: `The bike with ID ${bike_id} does not exist in database!` });
         }
     });
 });
@@ -94,7 +94,7 @@ bikes.get("/editBike", (req, res) => {
                 res.json({ message: `The dates have been changed for bike ID ${bike_id}!` });
             });
         } else {
-            res.json({ message: `The bike with ID ${bike_id} does not exist in database!` });
+            res.json({ type: "error", message: `The bike with ID ${bike_id} does not exist in database!` });
         }
     });
 });

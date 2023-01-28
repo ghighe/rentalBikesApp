@@ -11,7 +11,7 @@ invoices.get("/getInvoices", (req, res) => {
         if (result.length != 0) {
             res.json({ message: result });
         } else {
-            res.json({ message: `No invoices!`});
+            res.json({ type: "error", message: `No invoices!`});
         }
     });
 });

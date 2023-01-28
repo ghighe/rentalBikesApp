@@ -23,7 +23,7 @@ const AddBikeForm = () => {
     formReset.current.reset();
 
     axios.post("/bike_types/addBikeType", data).then((response) => {
-      Swal.fire("Good job!", `${response.data.message}`, "success");
+      Swal.fire((response.data.type === "error" ? "Error!" : "Good job!"), `${response.data.message}`, (response.data.type === "error" ? "warning" : "success"));
     });
   }
 

@@ -11,7 +11,7 @@ bike_types.get("/getBikeTypes", (req, res) => {
         if (result.length != 0) {
             res.json({ message: result });
         } else {
-            res.json({ message: `No bike types!`});
+            res.json({ type: "error", message: `No bike types!`});
         }
     });
 });
@@ -26,7 +26,7 @@ bike_types.get("/getBikeType", (req, res) => {
         if (result.length != 0) {
             res.json({ message: result });
         } else {
-            res.json({ message: `No bike type with ID ${id}!`});
+            res.json({ type: "error", message: `No bike type with ID ${id}!`});
         }
     });
 });
@@ -35,12 +35,22 @@ bike_types.post("/addBikeType", (req, res) => {
     const id = req.body.id;
     const description = req.body.description;
     const price_per_minute = req.body.price_per_minute;
-    database.query(`INSERT INTO bike_types (id, description, price_per_minute) VALUES ("${id}", "${description}", "${price_per_minute}")`, (err, result, fields) => {
+    database.query(`SELECT id FROM bike_types WHERE id="${id}"`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err });
             return;
         }
-        res.json({ message: `Success! A new bike type with ID ${id} has been added!` });
+        if (!result.length) {
+            database.query(`INSERT INTO bike_types (id, description, price_per_minute) VALUES ("${id}", "${description}", "${price_per_minute}")`, (err, result, fields) => {
+                if (err) {
+                    res.json({ type: "error", message: err });
+                    return;
+                }
+                res.json({ message: `Success! A new bike type with ID ${id} has been added!` });
+            });
+        } else {
+            res.json({ type: "error", message: `There is already a bike type with ID ${id}!` });
+        }
     });
 });
 
@@ -62,7 +72,7 @@ bike_types.get("/editBikeType", (req, res) => {
                 res.json({ message: `The dates have been changed for bike type ID ${id}!` });
             });
         } else {
-            res.json({ message: `The bike type with ID ${id} does not exist in database!` });
+            res.json({ type: "error", message: `The bike type with ID ${id} does not exist in database!` });
         }
     });
 });
@@ -83,7 +93,7 @@ bike_types.get("/deleteBikeType", (req, res) => {
                 res.json({ message: `Bike Type with ID ${id} has been deleted!` });
             });
         } else {
-            res.json({ message: `The bike type with ID ${id} does not exist in database!` });
+            res.json({ type: "error", message: `The bike type with ID ${id} does not exist in database!` });
         }
     });
 });
