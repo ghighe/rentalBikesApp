@@ -9,7 +9,7 @@ bike_types.get("/getBikeTypes", (req, res) => {
             return;
         }
         if (result.length != 0) {
-            res.json({ message: result });
+            res.json({ type: "success", message: result });
         } else {
             res.json({ type: "error", message: `No bike types!`});
         }
@@ -24,7 +24,7 @@ bike_types.get("/getBikeType", (req, res) => {
             return;
         }
         if (result.length != 0) {
-            res.json({ message: result });
+            res.json({ type: "success", message: result });
         } else {
             res.json({ type: "error", message: `No bike type with ID ${id}!`});
         }
@@ -46,7 +46,7 @@ bike_types.post("/addBikeType", (req, res) => {
                     res.json({ type: "error", message: err });
                     return;
                 }
-                res.json({ message: `Success! A new bike type with ID ${id} has been added!` });
+                res.json({ type: "success", message: `Success! A new bike type with ID ${id} has been added!` });
             });
         } else {
             res.json({ type: "error", message: `There is already a bike type with ID ${id}!` });
@@ -69,7 +69,7 @@ bike_types.get("/editBikeType", (req, res) => {
                     res.json({ type: "error", message: err });
                     return;
                 }
-                res.json({ message: `The dates have been changed for bike type ID ${id}!` });
+                res.json({ type: "success", message: `The dates have been changed for bike type ID ${id}!` });
             });
         } else {
             res.json({ type: "error", message: `The bike type with ID ${id} does not exist in database!` });
@@ -90,7 +90,7 @@ bike_types.get("/deleteBikeType", (req, res) => {
                     res.json({ type: "error", message: err });
                     return;
                 }
-                res.json({ message: `Bike Type with ID ${id} has been deleted!` });
+                res.json({ type: "success", message: `Bike Type with ID ${id} has been deleted!` });
             });
         } else {
             res.json({ type: "error", message: `The bike type with ID ${id} does not exist in database!` });
