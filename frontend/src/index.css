@@ -5,8 +5,3 @@
 * {
   overflow: hidden;
 }
-
-canvas {
-  height: 200px !important;
-  width: 400px !important;
-}

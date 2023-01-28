@@ -1,7 +1,11 @@
 import "./AddBike.css";
+import AddBikeForm from "../Components/Bikes/AddBikeForm";
 
 const AddBike = () => {
-  return <h1>This is AddBike Page</h1>;
+  return (
+    <AddBikeForm />
+    // <EditBikeForm />
+  );
 };
 
 export default AddBike;

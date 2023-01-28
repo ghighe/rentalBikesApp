@@ -4,18 +4,18 @@ import {
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
@@ -31,7 +31,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Daily Rentals"
+      text: "Revenue"
     },
     labels: {
       backgroundColor: "white"
@@ -52,14 +52,14 @@ export const options = {
   }
 };
 
-const labels = ["M", "T", "W", "T", "F", "S", "S"];
+const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "Rentals per weekday",
-      data: [5, 2, 1, 4, 3, 7, 8],
+      label: "Revenue in the first 6 months",
+      data: [22, 25, 60, 15, 45, 20, 11],
       borderColor: "rgb(255,255,255)",
       borderWidth: 1,
       backgroundColor: "rgb(255,255,255)"
@@ -67,14 +67,14 @@ export const data = {
   ]
 };
 
-const LineChart = (props) => {
+const BarChar = () => {
   return (
-    <Line
-      style={{ backgroundColor: `${props.color}`, height: "300px" }}
+    <Bar
+      style={{ backgroundColor: "lightblue", height: "300px" }}
       options={options}
       data={data}
     />
   );
 };
 
-export default LineChart;
+export default BarChar;
