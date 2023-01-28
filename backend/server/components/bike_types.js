@@ -32,9 +32,9 @@ bike_types.get("/getBikeType", (req, res) => {
 });
 
 bike_types.post("/addBikeType", (req, res) => {
-    const id = req.query.id;
-    const description = req.query.description;
-    const price_per_minute = req.query.price_per_minute;
+    const id = req.body.id;
+    const description = req.body.description;
+    const price_per_minute = req.body.price_per_minute;
     database.query(`INSERT INTO bike_types (id, description, price_per_minute) VALUES ("${id}", "${description}", "${price_per_minute}")`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err });
