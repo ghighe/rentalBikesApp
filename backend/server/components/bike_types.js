@@ -49,7 +49,19 @@ bike_types.post("/addBikeType", (req, res) => {
                 res.json({ type: "success", message: `Success! A new bike type with ID ${id} has been added!` });
             });
         } else {
-            res.json({ type: "error", message: `There is already a bike type with ID ${id}!` });
+            database.query(`SELECT id FROM bike_types ORDER BY id DESC LIMIT 1`, (err, result, fields) => {
+                if (err) {
+                    res.json({ type: "error", message: err.sqlMessage + ". Query: " + err.sql });
+                    return;
+                }
+                let suggest_text = "";
+                if (result.length != 0) {
+                    let last_id = result[0]['id'];
+                    let new_id = last_id + 1;
+                    suggest_text = ` We suggest you enter the ID ${new_id}!`;
+                }
+                res.json({ type: "error", message: `There is already a bike type with ID ${id}!${suggest_text}` });
+            });
         }
     });
 });
