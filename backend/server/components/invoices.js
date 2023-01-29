@@ -5,7 +5,7 @@ const database = require("../database");
 invoices.get("/getInvoices", (req, res) => {
     database.query("SELECT * FROM invoices", (err, result, fields) => {
         if (err) {
-            res.json({ type: "error", message: err });
+            res.json({ type: "error", message: err.sqlMessage + ". Query: " + err.sql });
             return;
         }
         if (result.length != 0) {
