@@ -49,17 +49,20 @@ const AddBikeForm = () => {
   }
 
   return (
-    <div className=" flex justify-center mt-10 bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
+    <div className=" flex justify-center w-1/2 mt-10 m-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
       <div className="absolute top-0  w-full py-4 bg-dark-red text-center text-white">
         Add Bike Types
         <span className="block text-sm text-center">
           Add new bike type in the system
         </span>
       </div>
-      <form className="w-full max-w-md" onSubmit={addBikeType}>
-        <div className=" border-b border-dark-red py-2">
+      <form
+        className="w-full max-w-md flex flex-col justify-center items-center"
+        onSubmit={addBikeType}
+      >
+        <div className=" border-b border-gray-300 py-2 ">
           <input
-            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none"
+            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none focus:shadow-outline border-b border-dark-red-500"
             type="text"
             value={formInputs.id}
             onChange={idChangeHandler}
@@ -68,7 +71,7 @@ const AddBikeForm = () => {
           />
         </div>
 
-        <div className=" border-b border-dark-red py-2 mt-2">
+        <div className=" border-b border-gray-300 py-2 mt-2">
           <input
             className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none"
             type="number"
@@ -78,17 +81,16 @@ const AddBikeForm = () => {
             aria-label="Price per minute.."
           />
         </div>
-        <div className="w-full">
-          <div className="mb-3 xl:w-96">
-            <label
-              htmlFor="exampleFormControlTextarea1"
-              className="form-label inline-block mb-2 text-gray-400 mt-1 relative top-2"
-            >
-              Extra
-            </label>
-            <textarea
-              className="
-        block
+        <div className="mb-3 xl:w-96">
+          <label
+            htmlFor="exampleFormControlTextarea1"
+            className="form-label inline-block mb-2 text-gray-400 mt-1 relative top-2"
+          >
+            Extra
+          </label>
+          <textarea
+            className="
+
         border
         w-full
         px-3
@@ -98,14 +100,14 @@ const AddBikeForm = () => {
         outline-0
         resize-none
       "
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Here you can specify additional information"
-              value={formInputs.description}
-              onChange={infoChangeHandler}
-            ></textarea>
-          </div>
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="Here you can specify additional information"
+            value={formInputs.description}
+            onChange={infoChangeHandler}
+          ></textarea>
         </div>
+
         <div className="flex justify-center">
           <button
             type="submit"

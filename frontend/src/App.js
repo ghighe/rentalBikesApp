@@ -9,8 +9,6 @@ import RouterLinks from "./Routes/RouterLinks";
 const App = () => {
   const [isOpen, setIsOpen] = useState(true);
 
-  console.log("excuted");
-
   return (
     <div className="flex mx-0 my-0 py-0 px-0 bg-gray-200">
       <div
