@@ -6,9 +6,14 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.3",
+    "chart.js": "^4.2.0",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-icons": "^4.7.1",
+    "react-scripts": "5.0.1",
+    "sweetalert2": "^11.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,5 +38,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "react-router-dom": "^6.7.0",
+    "tailwindcss": "^3.2.4"
+  },
+  "proxy": "http://localhost:4000"
 }
