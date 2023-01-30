@@ -43,11 +43,10 @@ const AddBikeForm = () => {
     };
     axios.post("/bike_types/addBikeType", data).then((response) => {
       if (response.data.type !== "error") {
-        formReset.current.reset();
+        setFormInputs(initialFormInputs);
       }
       generateAlert(response.data.type, response.data.message);
     });
-    setFormInputs(initialFormInputs);
     isFormValid = false;
   }
 
@@ -66,7 +65,7 @@ const AddBikeForm = () => {
         <div className=" border-b border-gray-300 py-2 ">
           <input
             className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none focus:shadow-outline border-b border-dark-red-500"
-            type="text"
+            type="number"
             value={formInputs.id}
             onChange={idChangeHandler}
             placeholder="Type(1-classic,2-electric,3-scooter...)"
@@ -76,7 +75,7 @@ const AddBikeForm = () => {
 
         <div className=" border-b border-gray-300 py-2 mt-2">
           <input
-            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none"
+            className="bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none appearance-none"
             type="number"
             value={formInputs.price_per_minute}
             onChange={priceChangeHandler}
