@@ -20,9 +20,10 @@ const AddBikeForm = () => {
       price_per_minute: +priceValue
     };
 
-    formReset.current.reset();
-
     axios.post("/bike_types/addBikeType", data).then((response) => {
+      if (response.data.type !== "error") {
+        formReset.current.reset();
+      }
       generateAlert(response.data.type, response.data.message);
     });
   }
