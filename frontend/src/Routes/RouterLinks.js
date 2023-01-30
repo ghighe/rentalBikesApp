@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import AddBike from "../Pages/AddBike";
+import Bikes from "../Pages/Bikes";
 import Dashboard from "../Pages/Dashboard";
 import Database from "../Pages/Database";
 import Maps from "../Pages/Maps";
@@ -11,7 +11,7 @@ const RouterLinks = () => {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />} />
-      <Route path="add_bikes" element={<AddBike />} />
+      <Route path="add_bikes" element={<Bikes />} />
       <Route path="database" element={<Database />} />
       <Route path="maps" element={<Maps />} />
       <Route path="notifications" element={<Notifications />} />
