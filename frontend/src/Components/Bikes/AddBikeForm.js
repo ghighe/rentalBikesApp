@@ -5,7 +5,7 @@ import generateAlert from "../../utils/generateAlert";
 let initialFormInputs = {
   id: "",
   description: "",
-  price_per_minute: ""
+  price_per_minute: "",
 };
 
 const AddBikeForm = () => {
@@ -39,7 +39,7 @@ const AddBikeForm = () => {
     const data = {
       id: formInputs.id,
       description: formInputs.description,
-      price_per_minute: +formInputs.price_per_minute
+      price_per_minute: +formInputs.price_per_minute,
     };
     axios.post("/bike_types/addBikeType", data).then((response) => {
       if (response.data.type !== "error") {
@@ -51,7 +51,7 @@ const AddBikeForm = () => {
   }
 
   return (
-    <div className=" flex justify-center w-1/2 mt-10 m-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
+    <div className="flex justify-center w-1/2 mt-10 m-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
       <div className="absolute top-0  w-full py-4 bg-dark-red text-center text-white">
         Add Bike Types
         <span className="block text-sm text-center">
