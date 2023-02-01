@@ -11,7 +11,7 @@ const DashboardCards = () => {
 
   useEffect(() => {
     if (show_bikes_count.current === false) return;
-    axios.get("/bikes/getBikesCount").then((response) => {
+    axios.get("/rentals/getBikesCount").then((response) => {
       let data = response.data;
       setRentalsCount(data.message.rentals_count);
       setBikesCount(data.message.bikes_count);
