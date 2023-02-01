@@ -63,8 +63,8 @@ const DashboardCards = () => {
         cardTitle={cardTitleStyle}
         cardContent={cardContentStyle}
         cardFooter={cardFooterStyle}
-        cardTitleText={"Commits"}
-        cardCentralText={<RepositoryStars owner="ghighe" repo="rentalBikesApp" commits={true} />}
+        cardTitleText={"Fixed Issues"}
+        cardCentralText={"75"}
         cardFooterText={"Tracked from github"}
       ></Card>
 
