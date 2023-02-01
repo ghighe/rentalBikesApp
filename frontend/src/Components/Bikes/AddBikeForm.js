@@ -65,7 +65,7 @@ const AddBikeForm = () => {
         <div className=" border-b border-gray-300 py-2 ">
           <input
             className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none focus:shadow-outline border-b border-dark-red-500"
-            type="number"
+            type="text"
             value={formInputs.id}
             onChange={idChangeHandler}
             placeholder="Type(1-classic,2-electric,3-scooter...)"

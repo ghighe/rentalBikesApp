@@ -9,7 +9,7 @@ const EditBikeForm = () => {
         <MdDirectionsBike className="mx-4" />
         <span className="active:translate-y-1">Bikes</span>
       </div>
-      <div className="flex flex-col flex-wrap  justify-between text-left mr-96">
+      <div className="flex flex-col flex-wrap mr-96">
         <div className="mt-8">1 - Clasic</div>
         <div className="mt-8">2 - Electric </div>
         <div className="mt-8">3 - Scooter </div>
