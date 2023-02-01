@@ -24,9 +24,7 @@ const EditBikeForm = () => {
   }, [message]);
 
   useEffect(() => {
-    if (bike_types.length === 0) {
-      loadBikeTypes();
-    }
+    loadBikeTypes();
   }, [bike_types]);
 
   return (
@@ -39,7 +37,7 @@ const EditBikeForm = () => {
       </div>
       <div className="flex flex-col flex-wrap  justify-between text-left mr-96">
         {
-          bike_types.map((item, key) => {
+          Array.isArray(bike_types) && bike_types.map((item, key) => {
             return <div key={key} className="mt-8">{item.id}. {item.description} ({item.price_per_minute}$ per minute) <button onClick={() => deleteBikeType(item.id)}>x</button></div>;
           })
         }
