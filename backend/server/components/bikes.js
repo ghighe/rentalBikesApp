@@ -166,26 +166,4 @@ bikes.get("/editBike", (req, res) => {
   );
 });
 
-bikes.get("/getBikesCount", (req, res) => {
-  database.query(
-    `Select (select count(bikes.id) from bikes) as bikes_count, (select count(rentals.id) from rentals) as rentals_count`,
-    (err, result, fields) => {
-      if (err) {
-        res.json({
-          type: "error",
-          message: err.sqlMessage + ". Query: " + err.sql
-        });
-        return;
-      }
-      res.status(200).json({
-        type: "success",
-        message: {
-          bikes_count: result[0]["bikes_count"],
-          rentals_count: result[0]["rentals_count"]
-        }
-      });
-    }
-  );
-});
-
 module.exports = bikes;

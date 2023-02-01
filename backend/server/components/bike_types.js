@@ -89,8 +89,8 @@ bike_types.get("/editBikeType", (req, res) => {
     });
 });
 
-bike_types.get("/deleteBikeType", (req, res) => {
-    const id = req.query.id;
+bike_types.post("/deleteBikeType", (req, res) => {
+    const id = req.body.id;
     database.query(`SELECT id FROM bike_types WHERE id="${id}"`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err.sqlMessage + ". Query: " + err.sql });
