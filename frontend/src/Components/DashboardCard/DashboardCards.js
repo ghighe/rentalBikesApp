@@ -1,10 +1,12 @@
 import Card from "../UI/Card";
 import { useEffect, useState, useRef } from "react";
+import generateAlert from "../../utils/generateAlert";
 import axios from "axios";
 
 const DashboardCards = () => {
   const [rentals_count, setRentalsCount] = useState(0);
   const [bikes_count, setBikesCount] = useState(0);
+  const [revenueValue, setRevenueValue] = useState(0);
   const show_bikes_count = useRef(true);
 
   useEffect(() => {
@@ -13,6 +15,14 @@ const DashboardCards = () => {
       let data = response.data;
       setRentalsCount(data.message.rentals_count);
       setBikesCount(data.message.bikes_count);
+    });
+    axios.get("/rentals/getRevenueRentals").then((response) => {
+      let data = response.data;
+      if (data.type === "error" && data.message.total_net_amount !== 0) {
+        generateAlert("error", response.data.message);
+      } else {
+        setRevenueValue(data.message.total_net_amount);
+      }
     });
     show_bikes_count.current = false;
   }, []);
@@ -43,8 +53,8 @@ const DashboardCards = () => {
         cardContent={cardContentStyle}
         cardFooter={cardFooterStyle}
         cardTitleText={"Revenue"}
-        cardCentralText={"$34.000"}
-        cardFooterText={"Last Month Revenue"}
+        cardCentralText={`$${revenueValue}`}
+        cardFooterText={"Last Month"}
       ></Card>
 
       <Card

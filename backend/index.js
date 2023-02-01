@@ -3,6 +3,7 @@ const app = express();
 const bikes = require("./server/components/bikes");
 const bike_types = require("./server/components/bike_types");
 const invoices = require("./server/components/invoices");
+const rentals = require("./server/components/rentals");
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const port = process.env.SERVER_PORT || 4000;
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 app.use("/bikes", bikes);
 app.use("/bike_types", bike_types);
 app.use("/invoices", invoices);
+app.use("/rentals", rentals);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
