@@ -102,7 +102,13 @@ bike_types.post("/deleteBikeType", (req, res) => {
                     res.json({ type: "error", message: err.sqlMessage + ". Query: " + err.sql });
                     return;
                 }
-                res.json({ type: "success", message: `Bike Type with ID ${id} has been deleted!` });
+                database.query(`DELETE FROM bikes WHERE type="${id}"`, (err, result, fields) => {
+                    if (err) {
+                        res.json({ type: "error", message: err.sqlMessage + ". Query: " + err.sql });
+                        return;
+                    }
+                    res.json({ type: "success", message: `Bike Type with ID ${id} has been deleted!` });
+                });
             });
         } else {
             res.json({ type: "error", message: `The bike type with ID ${id} does not exist in database!` });
