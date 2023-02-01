@@ -1,6 +1,7 @@
 import Card from "../UI/Card";
 import { useEffect, useState, useRef } from "react";
 import generateAlert from "../../utils/generateAlert";
+import RepositoryStars from "./RepositoryStars";
 import axios from "axios";
 
 const DashboardCards = () => {
@@ -72,9 +73,9 @@ const DashboardCards = () => {
         cardTitle={cardTitleStyle}
         cardContent={cardContentStyle}
         cardFooter={cardFooterStyle}
-        cardTitleText={"Followers"}
-        cardCentralText={"+240"}
-        cardFooterText={"Just Uploaded"}
+        cardTitleText={"Github Stars"}
+        cardCentralText={<RepositoryStars owner="ghighe" repo="rentalBikesApp" />}
+        cardFooterText={"We are waiting for you on Github with a star!"}
       ></Card>
     </div>
   );
