@@ -2,7 +2,7 @@ import Card from "../UI/Card";
 import { useEffect, useState, useRef } from "react";
 import generateAlert from "../../utils/generateAlert";
 import RepositoryStars from "./RepositoryStars";
-import axios from "axios";
+import fetchData from "../../utils/fetchEndPoints";
 
 const DashboardCards = () => {
   const [rentals_count, setRentalsCount] = useState(0);
@@ -15,19 +15,22 @@ const DashboardCards = () => {
 
   useEffect(() => {
     if (show_bikes_count.current === false) return;
-    axios.get("/rentals/getBikesCount").then((response) => {
-      let data = response.data;
-      setRentalsCount(data.message.rentals_count);
-      setBikesCount(data.message.bikes_count);
-    });
-    axios.get("/rentals/getRevenueRentals").then((response) => {
-      let data = response.data;
-      if (data.type === "error" && data.message.total_net_amount !== 0) {
-        generateAlert("error", response.data.message);
+    (async () => {
+      const response = await fetchData("/rentals/getBikesCount");
+      setRentalsCount(response.message.rentals_count);
+      setBikesCount(response.message.bikes_count);
+    })();
+    (async () => {
+      const response = await fetchData("/rentals/getRevenueRentals");
+      if (
+        response.type === "error" &&
+        response.message.total_net_amount !== 0
+      ) {
+        generateAlert("error", response.message);
       } else {
-        setRevenueValue(data.message.total_net_amount);
+        setRevenueValue(response.message.total_net_amount);
       }
-    });
+    })();
     show_bikes_count.current = false;
   }, []);
 
