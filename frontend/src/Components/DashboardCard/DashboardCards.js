@@ -10,6 +10,9 @@ const DashboardCards = () => {
   const [revenueValue, setRevenueValue] = useState(0);
   const show_bikes_count = useRef(true);
 
+  const repoOwner = "ghighe";
+  const repoName = "rentalBikesApp";
+
   useEffect(() => {
     if (show_bikes_count.current === false) return;
     axios.get("/rentals/getBikesCount").then((response) => {
@@ -29,7 +32,7 @@ const DashboardCards = () => {
   }, []);
 
   const cardLayout =
-    "block rounded-lg shadow-lg w-80 bg-white text-center relative";
+    "block rounded-lg shadow-lg w-80 bg-white text-center relative cursor-pointer transition duration-200 ease-in-out transform hover:scale-105 hover:bg-gray-100";
   const cardTitleStyle =
     "text-gray-400 text-md font-light mb-2  top-2 right-1 text-center ";
   const cardContentStyle = "text-gray-500 text-2xl  mb-4 text-center mt-2 ";
@@ -64,7 +67,9 @@ const DashboardCards = () => {
         cardContent={cardContentStyle}
         cardFooter={cardFooterStyle}
         cardTitleText={"Commits"}
-        cardCentralText={<RepositoryStars owner="ghighe" repo="rentalBikesApp" commits={true} />}
+        cardCentralText={
+          <RepositoryStars owner={repoOwner} repo={repoName} commits={true} />
+        }
         cardFooterText={"Tracked from github"}
       ></Card>
 
@@ -74,7 +79,7 @@ const DashboardCards = () => {
         cardContent={cardContentStyle}
         cardFooter={cardFooterStyle}
         cardTitleText={"Github Stars"}
-        cardCentralText={<RepositoryStars owner="ghighe" repo="rentalBikesApp" />}
+        cardCentralText={<RepositoryStars owner={repoOwner} repo={repoName} />}
         cardFooterText={"We are waiting for you on Github with a star!"}
       ></Card>
     </div>

@@ -24,7 +24,7 @@ const App = () => {
         />
         <NavBar isOpen={isOpen} />
       </div>
-      <div className="p-7 text-2xl font-semibold w-screen">
+      <div className="p-7 text-2xl font-semibold w-screen h-screen overflow-y-scroll">
         <RouterLinks />
       </div>
     </div>

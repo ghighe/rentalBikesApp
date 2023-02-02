@@ -1,18 +1,27 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
-import axios from "axios";
+import fetchData from "../../utils/fetchEndPoints";
 
 const RepositoryStars = ({ owner, repo, commits }) => {
-  const [starCount, setStarCount] = useState(0);
+  const [count, setCount] = useState(0);
+
+  let url = null;
+
+  if (commits) {
+    url = `https://api.github.com/repos/${owner}/${repo}/commits`;
+  } else {
+    url = `https://api.github.com/repos/${owner}/${repo}`;
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get(`https://api.github.com/repos/${owner}/${repo}${commits ? "/commits" : ""}`);
-      setStarCount(commits ? result.data.length : result.data.stargazers_count);
-    };
-    fetchData();
-  }, [owner, repo, commits]);
+    (async () => {
+      const result = await fetchData(url);
+      let count = commits ? result.length : result.stargazers_count;
+      setCount(count);
+    })();
+  }, []);
 
-  return `${starCount} ${commits ? commits.length === 1 ? "commit" : "commits" : starCount === 1 ? "star" : "stars" }`;
+  return ` ${count}`;
 };
 
 export default RepositoryStars;

@@ -23,7 +23,7 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
-  maintainAspectRatio: false,
+  maintainAspectRatio: true,
 
   plugins: {
     legend: {
@@ -70,7 +70,7 @@ export const data = {
 const BarChar = () => {
   return (
     <Bar
-      style={{ backgroundColor: "lightblue", height: "300px" }}
+      style={{ backgroundColor: "lightblue" }}
       options={options}
       data={data}
     />
