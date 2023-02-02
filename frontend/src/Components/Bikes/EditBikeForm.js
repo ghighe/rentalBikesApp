@@ -1,13 +1,13 @@
 import { MdDirectionsBike, MdOutlineFormatListNumbered } from "react-icons/md";
 import fetchData from "../../utils/fetchEndPoints";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import generateAlert from "../../utils/generateAlert";
+import BikesContext from '../../BikesContext';
 
 const EditBikeForm = () => {
   const [bike_types, setBikeTypes] = useState([]);
   const [message, setMessage] = useState({});
-
-  const [isChanged, setIsChanged] = useState(false);
+  const { isChanged, setIsChanged } = useContext(BikesContext);
 
   const deleteBikeType = async (id) => {
     const response = await fetchData("/bike_types/deleteBikeType", "POST", {
@@ -32,6 +32,7 @@ const EditBikeForm = () => {
       const response = await fetchData("/bike_types/getBikeTypes");
       setBikeTypes(response.message);
     })();
+    console.log(Math.random());
   }, [isChanged]);
 
   return (

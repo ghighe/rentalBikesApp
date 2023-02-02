@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import generateAlert from "../../utils/generateAlert";
 import fetchData from "../../utils/fetchEndPoints";
+import BikesContext from '../../BikesContext';
 
 let initialFormInputs = {
   id: "",
@@ -12,6 +13,7 @@ const url = "/bike_types/addBikeType";
 
 const AddBikeForm = () => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
+  const { setIsChanged } = useContext(BikesContext);
 
   let isFormValid = false;
 
@@ -49,6 +51,7 @@ const AddBikeForm = () => {
         setFormInputs(initialFormInputs);
       }
       generateAlert(response.type, response.message);
+      setIsChanged(Math.random());
     })();
     isFormValid = false;
   }
