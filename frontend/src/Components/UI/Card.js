@@ -1,11 +1,19 @@
-const Card = (props) => {
+const Card = ({
+  cardLayout,
+  cardTitleText,
+  cardCentralText,
+  cardFooterText,
+  cardTitle,
+  cardContent,
+  cardFooter
+}) => {
   return (
-    <div className={props.cardLayout}>
+    <div className={cardLayout}>
       <div className="p-6">
-        <h5 className={props.cardTitle}>{props.cardTitleText}</h5>
-        <p className={props.cardContent}>{props.cardCentralText}</p>
+        <h5 className={cardTitle}>{cardTitleText}</h5>
+        <p className={cardContent}>{cardCentralText}</p>
       </div>
-      <div className={props.cardFooter}>{props.cardFooterText}</div>
+      <div className={cardFooter}>{cardFooterText}</div>
     </div>
   );
 };
