@@ -70,7 +70,9 @@ export const data = {
 const LineChart = (props) => {
   return (
     <Line
-      style={{ backgroundColor: `${props.color}`, height: "300px" }}
+      style={{
+        backgroundColor: `${props.color}`
+      }}
       options={options}
       data={data}
     />

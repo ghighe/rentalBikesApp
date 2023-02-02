@@ -1,12 +1,14 @@
-import axios from "axios";
 import { useState } from "react";
 import generateAlert from "../../utils/generateAlert";
+import fetchData from "../../utils/fetchEndPoints";
 
 let initialFormInputs = {
   id: "",
   description: "",
-  price_per_minute: "",
+  price_per_minute: ""
 };
+
+const url = "/bike_types/addBikeType";
 
 const AddBikeForm = () => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
@@ -39,14 +41,15 @@ const AddBikeForm = () => {
     const data = {
       id: formInputs.id,
       description: formInputs.description,
-      price_per_minute: +formInputs.price_per_minute,
+      price_per_minute: +formInputs.price_per_minute
     };
-    axios.post("/bike_types/addBikeType", data).then((response) => {
-      if (response.data.type !== "error") {
+    (async () => {
+      const response = await fetchData(url, "POST", data);
+      if (response.type !== "error") {
         setFormInputs(initialFormInputs);
       }
-      generateAlert(response.data.type, response.data.message);
-    });
+      generateAlert(response.type, response.message);
+    })();
     isFormValid = false;
   }
 
