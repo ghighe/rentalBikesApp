@@ -1,5 +1,5 @@
 import { MdDirectionsBike, MdOutlineFormatListNumbered } from "react-icons/md";
-import axios from "axios";
+import fetchData from "../../utils/fetchEndPoints";
 import { useEffect, useState } from "react";
 import generateAlert from "../../utils/generateAlert";
 
@@ -7,20 +7,18 @@ const EditBikeForm = () => {
   const [bike_types, setBikeTypes] = useState([]);
   const [message, setMessage] = useState({});
 
-  const loadBikeTypes = async () => {
-    await axios
-      .get("/bike_types/getBikeTypes")
-      .then((response) => setBikeTypes(response.data.message));
-  };
+  const [isChanged, setIsChanged] = useState(false);
 
-  const deleteBikeType = (id) => {
-    axios
-      .post("/bike_types/deleteBikeType", { id: id })
-      .then((response) => setMessage(response.data));
+  const deleteBikeType = async (id) => {
+    const response = await fetchData("/bike_types/deleteBikeType", "POST", {
+      id,
+    });
+    setMessage(response);
+    setIsChanged(Math.random());
   };
 
   const editBikeType = (id) => {
-    console.log(id);
+    setIsChanged(Math.random());
   };
 
   useEffect(() => {
@@ -30,8 +28,11 @@ const EditBikeForm = () => {
   }, [message]);
 
   useEffect(() => {
-    loadBikeTypes();
-  }, []);
+    (async () => {
+      const response = await fetchData("/bike_types/getBikeTypes");
+      setBikeTypes(response.message);
+    })();
+  }, [isChanged]);
 
   return (
     <div className="flex justify-center w-[80%] mt-10 mx-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
