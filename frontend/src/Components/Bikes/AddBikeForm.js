@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import generateAlert from "../../utils/generateAlert";
 import fetchData from "../../utils/fetchEndPoints";
-import BikesContext from '../../BikesContext';
 
 let initialFormInputs = {
   id: "",
@@ -11,9 +10,8 @@ let initialFormInputs = {
 
 const url = "/bike_types/addBikeType";
 
-const AddBikeForm = () => {
+const AddBikeForm = ({ setAddCount }) => {
   const [formInputs, setFormInputs] = useState(initialFormInputs);
-  const { setIsChanged } = useContext(BikesContext);
 
   let isFormValid = false;
 
@@ -49,21 +47,15 @@ const AddBikeForm = () => {
       const response = await fetchData(url, "POST", data);
       if (response.type !== "error") {
         setFormInputs(initialFormInputs);
+        setAddCount((currCount) => currCount + 1);
       }
       generateAlert(response.type, response.message);
-      setIsChanged(Math.random());
     })();
     isFormValid = false;
   }
 
   return (
-    <div className="flex justify-center w-1/2 mt-10 m-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
-      <div className="absolute top-0  w-full py-4 bg-dark-red text-center text-white">
-        Add Bike Types
-        <span className="block text-sm text-center">
-          Add new bike type in the system
-        </span>
-      </div>
+    <>
       <form
         className="w-full max-w-md flex flex-col justify-center items-center"
         onSubmit={addBikeType}
@@ -126,7 +118,7 @@ const AddBikeForm = () => {
           </button>
         </div>
       </form>
-    </div>
+    </>
   );
 };
 

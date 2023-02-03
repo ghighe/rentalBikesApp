@@ -1,39 +1,32 @@
 import { MdDirectionsBike, MdOutlineFormatListNumbered } from "react-icons/md";
 import fetchData from "../../utils/fetchEndPoints";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import generateAlert from "../../utils/generateAlert";
-import BikesContext from '../../BikesContext';
 
-const EditBikeForm = () => {
+const EditBikeForm = ({ addCount }) => {
   const [bike_types, setBikeTypes] = useState([]);
   const [message, setMessage] = useState({});
-  const { isChanged, setIsChanged } = useContext(BikesContext);
 
   const deleteBikeType = async (id) => {
     const response = await fetchData("/bike_types/deleteBikeType", "POST", {
-      id,
+      id
     });
     setMessage(response);
-    setIsChanged(Math.random());
   };
 
-  const editBikeType = (id) => {
-    setIsChanged(Math.random());
-  };
+  const editBikeType = (id) => {};
 
   useEffect(() => {
     if (message.type) {
       generateAlert(message.type, message.message);
     }
-  }, [message]);
 
-  useEffect(() => {
     (async () => {
       const response = await fetchData("/bike_types/getBikeTypes");
       setBikeTypes(response.message);
+      console.log("executed useEffect editbike");
     })();
-    console.log(Math.random());
-  }, [isChanged]);
+  }, [message, addCount]);
 
   return (
     <div className="flex justify-center w-[80%] mt-10 mx-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
