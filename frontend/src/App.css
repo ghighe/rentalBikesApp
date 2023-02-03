@@ -13,3 +13,25 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.shocked {
+  animation: shock 3s ease-in-out;
+}
+
+@keyframes shock {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-50px);
+  }
+  20% {
+    transform: translateY(50px);
+  }
+  30% {
+    transform: translateY(-50px);
+  }
+  40% {
+    transform: translateY(0);
+  }
+}
