@@ -17,8 +17,8 @@ bike_types.get("/getBikeTypes", (req, res) => {
     });
 });
 
-bike_types.get("/getBikeType", (req, res) => {
-    const id = req.query.id;
+bike_types.post("/getBikeType", (req, res) => {
+    const id = req.body.id;
     database.query(`SELECT * FROM bike_types WHERE id="${id}"`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err.sqlMessage + ". Query: " + err.sql });
@@ -78,10 +78,10 @@ bike_types.post("/addBikeType", (req, res) => {
     });
 });
 
-bike_types.get("/editBikeType", (req, res) => {
-    const id = req.query.id;
-    const description = req.query.description;
-    const price_per_minute = req.query.price_per_minute;
+bike_types.post("/editBikeType", (req, res) => {
+    const id = req.body.id;
+    const description = req.body.description;
+    const price_per_minute = req.body.price_per_minute;
     database.query(`SELECT value FROM settings WHERE key_name='hash'`, (err, result, fields) => {
         if (err) {
             res.json({ type: "error", message: err.sqlMessage + ". Query: " + err.sql });
