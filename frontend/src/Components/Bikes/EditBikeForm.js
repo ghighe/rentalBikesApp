@@ -24,7 +24,6 @@ const EditBikeForm = ({ addCount }) => {
     (async () => {
       const response = await fetchData("/bike_types/getBikeTypes");
       setBikeTypes(response.message);
-      console.log("executed useEffect editbike");
     })();
   }, [message, addCount]);
 
