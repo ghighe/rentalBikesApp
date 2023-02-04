@@ -1,11 +1,19 @@
-import { MdDirectionsBike, MdOutlineFormatListNumbered } from "react-icons/md";
+import { MdEdit } from "react-icons/md";
+import { RiCloseCircleLine } from "react-icons/ri";
 import fetchData from "../../utils/fetchEndPoints";
 import { useEffect, useState } from "react";
 import generateAlert from "../../utils/generateAlert";
 
-const ShowBikeTypes = ({ addCount, setShowAddBikes, setShowInput, setIsAnimating }) => {
+const ShowBikeTypes = ({
+  addCount,
+  setShowAddBikes,
+  setShowInput,
+  setIsAnimating
+}) => {
   const [bike_types, setBikeTypes] = useState([]);
   const [message, setMessage] = useState({});
+
+  let showBikeTypes = "";
 
   const deleteBikeType = async (id) => {
     const response = await fetchData("/bike_types/deleteBikeType", "POST", {
@@ -38,28 +46,42 @@ const ShowBikeTypes = ({ addCount, setShowAddBikes, setShowInput, setIsAnimating
     })();
   }, [message, addCount]);
 
+  if (bike_types.length === 0) {
+    showBikeTypes = "No bike types added";
+  } else {
+    showBikeTypes = bike_types.map((item, key) => {
+      return (
+        <div
+          key={key}
+          className="mt-4 text-md cursor-pointer shadow-lg rounded-md bg-gray-200 px-2 py-2  hover:bg-gray-400 hover:text-white w-screen flex lg:justify-between md:justify-start sm:justify-start"
+        >
+          {item.id} - {item.price_per_minute}$ per minute - {item.description}{" "}
+          <div className="inline cursor-pointer ">
+            <button
+              className="active:translate-y-1 mr-2"
+              onClick={() => editBikeType(item.id)}
+            >
+              <MdEdit className="text-lg ml-10" />
+            </button>
+            <button
+              className="active:translate-y-1"
+              onClick={() => deleteBikeType(item.id)}
+            >
+              <RiCloseCircleLine className="text-lg" />
+            </button>
+          </div>
+          <hr className="bg-gray-800 mt-2"></hr>
+        </div>
+      );
+    });
+  }
+
   return (
-    <div className="flex justify-center w-[80%] mt-10 mx-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
-      <div className="absolute flex font-bold cursor-pointer top-0 w-full py-4 bg-dark-red text-white">
-        Modify: <MdOutlineFormatListNumbered className="mx-4" />{" "}
-        <span className="active:translate-y-1">Bike Types</span>
-        <MdDirectionsBike className="mx-4" />
-        <span className="active:translate-y-1">Bikes</span>
+    <div className="flex justify-center w-full mt-10 bg-white rounded-lg  border border-gray-300 py-30 text-sm font-sm shadow-lg relative md:p-20">
+      <div className="absolute font-semibold cursor-pointer bg-dark-red top-0 py-4 text-white text-center w-full">
+        Modify and Delete Bikes Type
       </div>
-      <div className="flex flex-col justify-between text-left mr-96">
-        {Array.isArray(bike_types) &&
-          bike_types.map((item, key) => {
-            return (
-              <div key={key} className="mt-8 text-sm">
-                {item.id}. {item.description} ({item.price_per_minute}$ per
-                minute){" "}
-                <button onClick={() => editBikeType(item.id)}>✏ </button>
-                <button onClick={() => deleteBikeType(item.id)}>X</button>
-                <hr className="bg-gray-800 mt-2"></hr>
-              </div>
-            );
-          })}
-      </div>
+      <div>{showBikeTypes}</div>
     </div>
   );
 };

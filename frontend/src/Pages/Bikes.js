@@ -11,8 +11,9 @@ const Bikes = () => {
   return (
     <>
       <div
-        style={{display: showAddBikes ? "none" : ""}}
-        className="flex justify-center w-1/2 mt-10 m-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20">
+        style={{ display: showAddBikes ? "none" : "" }}
+        className="flex justify-center w-1/2 mt-10 m-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20"
+      >
         <div className="absolute top-0  w-full py-4 bg-dark-red text-center text-white">
           Add Bike Types
           <span className="block text-sm text-center">
@@ -22,17 +23,26 @@ const Bikes = () => {
         <AddBikeForm setAddCount={setAddCount} showAddBikes={showAddBikes} />
       </div>
       <div
-        style={{display: showAddBikes ? "" : "none"}}
-        className={`${isAnimating ? 'shocked' : ''} flex justify-center w-1/2 mt-10 m-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20`}>
+        style={{ display: showAddBikes ? "" : "none" }}
+        className={`${
+          isAnimating ? "shocked" : ""
+        } flex justify-center w-1/2 mt-10 m-auto bg-white rounded-lg border border-gray-300 py-40 text-sm font-sm shadow-lg relative md:p-20`}
+      >
         <div className="absolute top-0  w-full py-4 bg-dark-red text-center text-white">
-          Edit Bike Types
-          <span className="block text-sm text-center">
-            Edit Bike Type
-          </span>
+          Edit Bike Type
         </div>
-        <EditBikeForm setShowAddBikes={setShowAddBikes} setAddCount={setAddCount} showInput={showInput} />
+        <EditBikeForm
+          setShowAddBikes={setShowAddBikes}
+          setAddCount={setAddCount}
+          showInput={showInput}
+        />
       </div>
-      <ShowBikeTypes addCount={addCount} setIsAnimating={setIsAnimating} setShowInput={setShowInput} setShowAddBikes={setShowAddBikes} />
+      <ShowBikeTypes
+        addCount={addCount}
+        setIsAnimating={setIsAnimating}
+        setShowInput={setShowInput}
+        setShowAddBikes={setShowAddBikes}
+      />
     </>
   );
 };
