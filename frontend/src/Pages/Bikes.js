@@ -30,7 +30,7 @@ const Bikes = () => {
             Edit Bike Type
           </span>
         </div>
-        <EditBikeForm setAddCount={setAddCount} showInput={showInput} />
+        <EditBikeForm setShowAddBikes={setShowAddBikes} setAddCount={setAddCount} showInput={showInput} />
       </div>
       <ShowBikeTypes addCount={addCount} setIsAnimating={setIsAnimating} setShowInput={setShowInput} setShowAddBikes={setShowAddBikes} />
     </>

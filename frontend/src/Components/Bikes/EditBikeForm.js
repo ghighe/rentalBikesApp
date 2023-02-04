@@ -4,9 +4,9 @@ import fetchData from "../../utils/fetchEndPoints";
 
 const url = ["/bike_types/editBikeType", "/bike_types/getBikeType"];
 
-const AddBikeForm = ({ setAddCount, showInput }) => {
+const AddBikeForm = ({ setAddCount, showInput, setShowAddBikes }) => {
   let initialFormInputs = {
-    id: showInput,
+    id: "",
     description: "",
     price_per_minute: ""
   };
@@ -63,6 +63,7 @@ const AddBikeForm = ({ setAddCount, showInput }) => {
       if (response.type !== "error") {
         setFormInputs(initialFormInputs);
         setAddCount((currCount) => currCount + 1);
+        setShowAddBikes(false);
       }
       generateAlert(response.type, response.message);
     })();
