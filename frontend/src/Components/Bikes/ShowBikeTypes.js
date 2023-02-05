@@ -4,7 +4,6 @@ import fetchData from "../../utils/fetchEndPoints";
 import { useEffect, useState } from "react";
 import generateAlert from "../../utils/generateAlert";
 
-let last_bike_type_id = "";
 const ShowBikeTypes = ({
   addCount,
   setShowAddBikes,
@@ -34,18 +33,6 @@ const ShowBikeTypes = ({
     setShowAddBikes(true);
     setShowInput(id);
     handleClick();
-    if (last_bike_type_id !== id) {
-      document.querySelector(`.bike_type_id_${id}`).classList.add("bg-gray-400");
-      document.querySelector(`.bike_type_id_${id}`).classList.add("text-white");
-      if (last_bike_type_id !== "") {
-        document.querySelector(`.bike_type_id_${last_bike_type_id}`).classList.remove("bg-gray-400");
-        document.querySelector(`.bike_type_id_${last_bike_type_id}`).classList.remove("text-white");
-      }
-      last_bike_type_id = id;
-    } else {
-      document.querySelector(`.bike_type_id_${last_bike_type_id}`).classList.remove("bg-gray-400");
-      document.querySelector(`.bike_type_id_${last_bike_type_id}`).classList.remove("text-white");
-    }
   };
 
   useEffect(() => {
@@ -66,7 +53,7 @@ const ShowBikeTypes = ({
       return (
         <div
           key={key}
-          className={`${`bike_type_id_${item.id}`} mt-4 text-md cursor-pointer bg-gray-200 shadow-lg rounded-md px-2 py-2 hover:bg-gray-400 hover:text-white w-screen flex lg:justify-between md:justify-start sm:justify-start`}
+          className="mt-4 text-md cursor-pointer shadow-lg rounded-md bg-gray-200 px-2 py-2  hover:bg-gray-400 hover:text-white w-screen flex lg:justify-between md:justify-start sm:justify-start"
         >
           {item.id} - {item.price_per_minute}$ per minute - {item.description}{" "}
           <div className="inline cursor-pointer ">
