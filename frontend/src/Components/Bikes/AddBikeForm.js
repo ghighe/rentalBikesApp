@@ -24,7 +24,6 @@ const AddBikeForm = () => {
 
   const selectOptionHandler = (event) => {
     const optionSelected = event.target.value;
-    console.log(optionSelected);
     optionSelected !== "default"
       ? setBikeTypeOption(optionSelected)
       : setBikeTypeOption("");
@@ -34,10 +33,10 @@ const AddBikeForm = () => {
     event.preventDefault();
 
     const data = {
-      register_date: formatDate(selectedDate),
+      register_date: formatDate(selectedDate, "en-ZA"),
       type: bikeTypeOption
     };
-    // console.log(data);
+    console.log(data);
     try {
       const response = await fetchData(url, "POST", data);
       generateAlert(response.type, response.message);
@@ -51,7 +50,7 @@ const AddBikeForm = () => {
     <form className="flex flex-col" onSubmit={submitHandler}>
       <div>
         <DatePicker
-          className="bg-gray-300 text-black text-center mt-6 h-8"
+          className="bg-gray-300 text-black text-center mt-6 h-8 cursor-pointer"
           selected={selectedDate}
           id="datePicker"
           onChange={handleDateChange}
@@ -77,7 +76,7 @@ const AddBikeForm = () => {
 
       <div className="mt-6">
         <select
-          className="bg-gray-300 text-black w-full h-8 border-solid border-black text-center"
+          className="bg-gray-300 text-black w-full h-8 border-solid border-black text-center cursor-pointer"
           id="bikeType"
           onChange={selectOptionHandler}
         >

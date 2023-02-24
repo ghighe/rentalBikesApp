@@ -30,7 +30,7 @@ bikes.get("/getBikes", (req, res) => {
 });
 
 bikes.get("/getBike", (req, res) => {
-  const bike_id = req.query.bike_id;
+  const bike_id = req.params.bike_id;
   database.query(
     `SELECT description, price_per_mainute, register_date, type, bikes.id as bike_id, bike_types.id as type_id FROM bikes LEFT JOIN bike_types ON bike_types.id=bikes.type WHERE bikes.id="${bike_id}"`,
     (err, result, fields) => {

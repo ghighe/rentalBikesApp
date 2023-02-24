@@ -1,7 +1,12 @@
 import "./Database.css";
+import BikeTable from "../Components/Database/BikeTable";
 
 const Database = () => {
-  return <h1>This is Database Page</h1>;
+  return (
+    <>
+      <BikeTable />
+    </>
+  );
 };
 
 export default Database;
