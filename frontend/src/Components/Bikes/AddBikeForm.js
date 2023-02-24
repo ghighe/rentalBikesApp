@@ -1,121 +1,99 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { formatDate } from "../../utils/formatDate";
 import generateAlert from "../../utils/generateAlert";
 import fetchData from "../../utils/fetchEndPoints";
 
-let initialFormInputs = {
-  id: "",
-  description: "",
-  price_per_minute: ""
-};
+const url = "/bikes/addBike";
 
-const url = "/bike_types/addBikeType";
+const AddBikeForm = () => {
+  const [selectedDate, setSelectedDate] = useState("");
+  const [bikeTypeOption, setBikeTypeOption] = useState("");
 
-const AddBikeForm = ({ setAddCount }) => {
-  const [formInputs, setFormInputs] = useState(initialFormInputs);
+  let formValid = false;
 
-  let isFormValid = false;
-
-  if (
-    formInputs.id &&
-    formInputs.price_per_minute &&
-    formInputs.description.length > 5
-  ) {
-    isFormValid = true;
+  if (selectedDate !== "" && bikeTypeOption !== "") {
+    formValid = true;
   }
 
-  const idChangeHandler = (e) => {
-    setFormInputs({ ...formInputs, id: e.target.value });
+  const handleDateChange = (newDate) => {
+    setSelectedDate(newDate);
   };
 
-  const priceChangeHandler = (e) => {
-    setFormInputs({ ...formInputs, price_per_minute: e.target.value });
+  const selectOptionHandler = (event) => {
+    const optionSelected = event.target.value;
+    optionSelected !== "default"
+      ? setBikeTypeOption(optionSelected)
+      : setBikeTypeOption("");
   };
 
-  const infoChangeHandler = (e) => {
-    setFormInputs({ ...formInputs, description: e.target.value });
-  };
-
-  function addBikeType(event) {
+  const submitHandler = async (event) => {
     event.preventDefault();
 
     const data = {
-      id: formInputs.id,
-      description: formInputs.description,
-      price_per_minute: +formInputs.price_per_minute
+      register_date: formatDate(selectedDate, "en-ZA"),
+      type: bikeTypeOption
     };
-    (async () => {
+    console.log(data);
+    try {
       const response = await fetchData(url, "POST", data);
-      if (response.type !== "error") {
-        setFormInputs(initialFormInputs);
-        setAddCount((currCount) => currCount + 1);
-      }
       generateAlert(response.type, response.message);
-    })();
-    isFormValid = false;
-  }
+      setBikeTypeOption("default");
+    } catch (error) {
+      console.log(`Cannot insert a new bike ${error}`);
+    }
+  };
 
   return (
-    <form
-      className="w-full max-w-md flex flex-col justify-center items-center"
-      onSubmit={addBikeType}
-    >
-      <div className=" border-b border-gray-300 py-2 ">
-        <input
-          className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none focus:shadow-outline border-b border-dark-red-500"
-          type="text"
-          value={formInputs.id}
-          onChange={idChangeHandler}
-          placeholder="Type(1-classic,2-electric,3-scooter...)"
-          aria-label="Type(1-classic,2-electric,3-scooter...)"
+    <form className="flex flex-col" onSubmit={submitHandler}>
+      <div>
+        <DatePicker
+          className="bg-gray-300 text-black text-center mt-6 h-8 cursor-pointer"
+          selected={selectedDate}
+          id="datePicker"
+          onChange={handleDateChange}
+          placeholderText="Select date"
+          popperModifiers={[
+            {
+              name: "offset",
+              options: {
+                offset: [5, 10]
+              }
+            },
+            {
+              name: "preventOverflow",
+              options: {
+                rootBoundary: "viewport",
+                tether: false,
+                altAxis: true
+              }
+            }
+          ]}
         />
       </div>
 
-      <div className=" border-b border-gray-300 py-2 mt-2">
-        <input
-          className="bg-transparent border-none w-full text-gray-700 mr-3 ml-2  py-1 px-2 leading-tight focus:outline-none appearance-none"
-          type="number"
-          value={formInputs.price_per_minute}
-          onChange={priceChangeHandler}
-          placeholder="Price per minute.."
-          aria-label="Price per minute.."
-        />
-      </div>
-      <div className="mb-3 xl:w-96">
-        <label
-          htmlFor="exampleFormControlTextarea1"
-          className="form-label inline-block mb-2 text-gray-400 mt-1 relative top-2"
+      <div className="mt-6">
+        <select
+          className="bg-gray-300 text-black w-full h-8 border-solid border-black text-center cursor-pointer"
+          id="bikeType"
+          onChange={selectOptionHandler}
         >
-          Extra
-        </label>
-        <textarea
-          className="
-
-        border
-        w-full
-        px-3
-        py-1.5
-        focus:border-dark-red
-        appearance-none
-        outline-0
-        resize-none
-      "
-          id="exampleFormControlTextarea1"
-          rows="3"
-          placeholder="Here you can specify additional information"
-          value={formInputs.description}
-          onChange={infoChangeHandler}
-        ></textarea>
+          <option value="default">Select a type</option>
+          <option value="1">classic</option>
+          <option value="2">electric</option>
+          <option value="3">hibrid</option>
+        </select>
       </div>
 
-      <div className="flex justify-center">
-        <button
-          type="submit"
-          disabled={!isFormValid}
-          className=" bg-red-500 hover:bg-red-700 text-white font-bold focus:outline-none py-2 px-4 border rounded disabled:opacity-75 disabled:cursor-not-allowed"
-        >
-          Add Entry
-        </button>
-      </div>
+      <button
+        type="submit"
+        disabled={!formValid}
+        className=" bg-red-500 hover:bg-red-700 text-white font-bold focus:outline-none py-2 px-4 mt-10 border rounded disabled:opacity-75 disabled:cursor-not-allowed"
+      >
+        Add Bike
+      </button>
     </form>
   );
 };

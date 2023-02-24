@@ -22,6 +22,7 @@ const DashboardCards = () => {
     })();
     (async () => {
       const response = await fetchData("/rentals/getRevenueRentals");
+      console.log(response);
       if (
         response.type === "error" &&
         response.message.total_net_amount !== 0
@@ -33,6 +34,8 @@ const DashboardCards = () => {
     })();
     show_bikes_count.current = false;
   }, []);
+
+  // console.log(`revenue ${revenueValue}`);
 
   const cardLayout =
     "block rounded-lg shadow-lg w-80 bg-white text-center relative cursor-pointer transition duration-200 ease-in-out transform hover:scale-105 hover:bg-gray-100";

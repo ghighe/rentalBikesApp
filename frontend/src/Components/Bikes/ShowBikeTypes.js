@@ -79,7 +79,7 @@ const ShowBikeTypes = ({
   return (
     <div className="flex justify-center w-full mt-10 bg-white rounded-lg  border border-gray-300 py-30 text-sm font-sm shadow-lg relative md:p-20">
       <div className="absolute font-semibold cursor-pointer bg-dark-red top-0 py-4 text-white text-center w-full">
-        Modify and Delete Bikes Type
+        Edit and Delete Bikes Type
       </div>
       <div>{showBikeTypes}</div>
     </div>
