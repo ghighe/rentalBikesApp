@@ -20,7 +20,7 @@ const Bikes = () => {
             Add new bike type in the system
           </span>
         </div>
-        <AddBikeForm setAddCount={setAddCount} showAddBikes={showAddBikes} />
+        <AddBikeForm setAddCount={setAddCount} />
       </div>
       <div
         style={{ display: showAddBikes ? "" : "none" }}
