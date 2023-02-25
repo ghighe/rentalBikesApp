@@ -1,22 +1,30 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { formatDate } from "../../utils/formatDate";
 import generateAlert from "../../utils/generateAlert";
 import fetchData from "../../utils/fetchEndPoints";
 
-const url = "/bikes/addBike";
+const url = ["/bikes/addBike", '/bike_types/getBikeTypes'];
 
 const AddBikeForm = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const [bikeTypeOption, setBikeTypeOption] = useState("");
+  const [bikeTypes, setBikeTypes] = useState([]);
 
   let formValid = false;
 
   if (selectedDate !== "" && bikeTypeOption !== "") {
     formValid = true;
   }
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetchData(url[1]);
+      setBikeTypes(response.message);
+    })();
+  }, []);
 
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate);
@@ -38,7 +46,7 @@ const AddBikeForm = () => {
     };
     console.log(data);
     try {
-      const response = await fetchData(url, "POST", data);
+      const response = await fetchData(url[0], "POST", data);
       generateAlert(response.type, response.message);
       setBikeTypeOption("default");
     } catch (error) {
@@ -81,9 +89,11 @@ const AddBikeForm = () => {
           onChange={selectOptionHandler}
         >
           <option value="default">Select a type</option>
-          <option value="1">classic</option>
-          <option value="2">electric</option>
-          <option value="3">hibrid</option>
+          {
+            bikeTypes.map((item, key) => {
+              return <option key={key} value={item.id}>{item.description}</option> 
+            })
+          }
         </select>
       </div>
 
